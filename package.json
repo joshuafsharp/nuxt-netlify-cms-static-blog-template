@@ -22,7 +22,8 @@
     "@nuxt/content": "^1.9.0",
     "@nuxt/typescript-runtime": "^2.0.0",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "vue-property-decorator": "^9.0.2"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",

@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
       <h1 class="title">nuxt-static-blog</h1>
       <div class="links">
         <a
@@ -26,9 +25,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator';
 
-export default Vue.extend({})
+@Component
+export default class HomePage extends Vue {}
 </script>
 
 <style>
