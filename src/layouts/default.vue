@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <Nuxt />
+  <div class="flex flex-col min-h-screen">
+    <AppHeader />
+    <Nuxt class="flex-grow" />
   </div>
 </template>
 

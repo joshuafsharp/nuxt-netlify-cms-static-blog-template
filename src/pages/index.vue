@@ -1,25 +1,27 @@
 <template>
-  <div class="container">
-    <div>
-      <h1 class="title">nuxt-static-blog</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="w-full max-w-screen-lg mx-auto p-4 lg:p-8">
+    <HeroCard class="mb-8 md:mb-16" />
+
+    <TechList class="mb-8 md:mb-16" />
+
+    <!-- Blog posts list -->
+    <h2 class="text-2xl text-gray-700 font-bold text-center mb-8">
+      &#65293; Recent Posts &#65293;
+    </h2>
+
+    <BlogPostsList
+      :blog-posts="posts"
+      :compact-display="true"
+      class="-mx-4 mb-8"
+    />
+
+    <div class="flex justify-center mb-8">
+      <n-link
+        to="/blog"
+        class="bg-blue-400 hover:bg-blue-300 rounded px-8 py-4 text-white font-bold"
+      >
+        Show All
+      </n-link>
     </div>
   </div>
 </template>
@@ -28,6 +30,18 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
+  async asyncData({ $content, error }) {
+    let posts;
+    try {
+      posts = await $content('blog').sortBy('date').limit(6).fetch();
+    } catch (e) {
+      error({ statusCode: 404, message: 'Blog Post not found' });
+    }
+
+    return {
+      posts,
+    };
+  },
   head() {
     return {
       script: [
@@ -38,41 +52,3 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class HomePage extends Vue {}
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

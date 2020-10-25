@@ -19,7 +19,7 @@ const config: NuxtConfig = {
   content: {},
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
+  css: ['~/assets/css/base.css'],
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
